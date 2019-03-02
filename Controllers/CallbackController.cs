@@ -49,7 +49,7 @@ namespace TestWebApp.Controllers
                         {
                             RandomId = new DateTime().Millisecond,
                             PeerId = msg.PeerId.Value,
-                            Message = "ЙА РОДИЛСА!!!!"
+                            Message = msg.Text
                         });
                         break;
                     }
