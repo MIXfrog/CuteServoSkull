@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VkNet.Abstractions;
 using VkNet.Model;
 using VkNet.Model.RequestParams;

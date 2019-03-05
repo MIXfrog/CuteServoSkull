@@ -12,6 +12,7 @@ namespace TestWebApp.Handlers.Impl
 {
     public class PollMessageHandler : IHandler
     {
+        private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
         private readonly List<string> Games = new List<string>
         {
@@ -37,19 +38,22 @@ namespace TestWebApp.Handlers.Impl
             {
                 AddAnswers = Games,
                 Question = "test",
-                IsMultiple = false
+                IsMultiple = false,
+                OwnerId = -OurGroupId
             });
 
             // Публикуем на стену в группе
             _vkApi.Wall.Post(new WallPostParams
             {
-                Attachments = new List<MediaAttachment> { poll }
+                Attachments = new List<MediaAttachment> { poll },
+                OwnerId = -OurGroupId,
+                FromGroup = true
             });
 
             // Делаем репост в канал
+
+
             /*_vkApi.Wall.Repost
-
-
 
             _vkApi.Messages.Send(new MessagesSendParams
             {

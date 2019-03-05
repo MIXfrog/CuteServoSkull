@@ -30,24 +30,12 @@ namespace TestWebApp.Handlers.Impl
 
         public void Handle(Message message)
         {
-            if (message.Text.Contains("покажи ID"))
+            _vkApi.Messages.Send(new MessagesSendParams
             {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    RandomId = new DateTime().Millisecond,
-                    PeerId = message.PeerId.Value,
-                    Message = message.OwnerId?.ToString() +"_"+ message.PeerId.Value
-                });
-            }
-            else
-            {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    RandomId = new DateTime().Millisecond,
-                    PeerId = message.PeerId.Value,
-                    Message = DefaultMessage[_random.Next(0, DefaultMessage.Count - 1)]
-                });
-            }
+                RandomId = new DateTime().Millisecond,
+                PeerId = message.PeerId.Value,
+                Message = DefaultMessage[_random.Next(0, DefaultMessage.Count - 1)]
+            });
         }
     }
 }
