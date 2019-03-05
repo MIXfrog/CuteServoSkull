@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace TestWebApp.Handlers.Impl
     {
         private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
+        public IConfiguration _configuration { get; }
         private readonly List<string> Games = new List<string>
         {
             "WarHammer 40k",
@@ -25,11 +27,11 @@ namespace TestWebApp.Handlers.Impl
         };
         private readonly string PollText = "Мы будем рады всем желающим. Клуб выдает разовые армии и проводит индивидуальное обучение новичков.";
 
-        public PollMessageHandler(IVkApi vkApi)
+        public PollMessageHandler(IVkApi vkApi, IConfiguration configuration)
         {
             _vkApi = vkApi;
+            _configuration = configuration;
         }
-
 
         public void Handle(Message message)
         {
@@ -49,12 +51,12 @@ namespace TestWebApp.Handlers.Impl
                 OwnerId = -OurGroupId,
                 FromGroup = true
             });*/
-
+            _vkApi.Authorize(new ApiAuthParams { AccessToken = _configuration["Config:AccessToken"] });
             _vkApi.Wall.Post(new WallPostParams
             {
                 Message = "test",
                 OwnerId = -OurGroupId,
-                FromGroup = true
+                FromGroup = true,
             });
 
             // Делаем репост в канал
