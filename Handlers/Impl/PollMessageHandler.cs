@@ -34,13 +34,13 @@ namespace TestWebApp.Handlers.Impl
         public void Handle(Message message)
         {
             // Создаем опрос
-            var poll = _vkApi.PollsCategory.Create(new PollsCreateParams
+            /*var poll = _vkApi.PollsCategory.Create(new PollsCreateParams
             {
                 AddAnswers = Games,
                 Question = "test",
                 IsMultiple = false,
                 OwnerId = -OurGroupId
-            });
+            });*/
 
             // Публикуем на стену в группе
             /*_vkApi.Wall.Post(new WallPostParams
