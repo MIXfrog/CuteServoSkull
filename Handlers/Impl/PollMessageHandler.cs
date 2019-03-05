@@ -15,7 +15,6 @@ namespace TestWebApp.Handlers.Impl
     {
         private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
-        public IConfiguration _configuration { get; }
         private readonly List<string> Games = new List<string>
         {
             "WarHammer 40k",
@@ -27,10 +26,9 @@ namespace TestWebApp.Handlers.Impl
         };
         private readonly string PollText = "Мы будем рады всем желающим. Клуб выдает разовые армии и проводит индивидуальное обучение новичков.";
 
-        public PollMessageHandler(IVkApi vkApi, IConfiguration configuration)
+        public PollMessageHandler(IVkApi vkApi)
         {
             _vkApi = vkApi;
-            _configuration = configuration;
         }
 
         public void Handle(Message message)
@@ -51,13 +49,26 @@ namespace TestWebApp.Handlers.Impl
                 OwnerId = -OurGroupId,
                 FromGroup = true
             });*/
-            _vkApi.Authorize(new ApiAuthParams { AccessToken = _configuration["Config:AccessToken"] });
-            _vkApi.Wall.Post(new WallPostParams
+
+            try
             {
-                Message = "test",
-                OwnerId = -OurGroupId,
-                FromGroup = true,
-            });
+                _vkApi.Wall.Post(new WallPostParams
+                {
+                    Message = "test",
+                    OwnerId = -OurGroupId,
+                    FromGroup = true,
+
+                });
+            }
+            catch (Exception ex)
+            {
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    RandomId = new DateTime().Millisecond,
+                    PeerId = message.PeerId.Value,
+                    Message = ex.Message
+                });
+            }
 
             // Делаем репост в канал
 
