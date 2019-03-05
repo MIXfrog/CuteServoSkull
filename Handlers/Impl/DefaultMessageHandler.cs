@@ -13,7 +13,7 @@ namespace TestWebApp.Handlers.Impl
 
         private readonly List<string> DefaultMessage = new List<string>
         {
-            "Какова Ваша воля",
+            "Какова Ваша воля?",
             "Да, Мастер?",
             "Ожидаю Ваших инструкций",
             "Да, о Великолепный?",
@@ -36,7 +36,7 @@ namespace TestWebApp.Handlers.Impl
                 {
                     RandomId = new DateTime().Millisecond,
                     PeerId = message.PeerId.Value,
-                    Message = message.ChatId.ToString() +"_"+ message.PeerId.Value
+                    Message = message.OwnerId.Value +"_"+ message.PeerId.Value
                 });
             }
             else
