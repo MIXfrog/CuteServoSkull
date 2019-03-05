@@ -43,9 +43,16 @@ namespace TestWebApp.Handlers.Impl
             });
 
             // Публикуем на стену в группе
-            _vkApi.Wall.Post(new WallPostParams
+            /*_vkApi.Wall.Post(new WallPostParams
             {
                 Attachments = new List<MediaAttachment> { poll },
+                OwnerId = -OurGroupId,
+                FromGroup = true
+            });*/
+
+            _vkApi.Wall.Post(new WallPostParams
+            {
+                Message = "test",
                 OwnerId = -OurGroupId,
                 FromGroup = true
             });
