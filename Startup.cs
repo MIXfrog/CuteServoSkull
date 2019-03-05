@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TestWebApp.Factory;
+using TestWebApp.Factory.Impl;
 using VkNet;
 using VkNet.Abstractions;
 using VkNet.Model;
@@ -35,6 +37,8 @@ namespace TestWebApp
                 api.Authorize(new ApiAuthParams { AccessToken = Configuration["Config:AccessToken"] });
                 return api;
             });
+
+            services.AddSingleton<IIncomeMessageHandlerFactory, IncomeMessageHandlerFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
