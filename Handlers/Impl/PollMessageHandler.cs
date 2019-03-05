@@ -55,16 +55,16 @@ namespace TestWebApp.Handlers.Impl
                 var x = _vkApi.Wall.Post(new WallPostParams
                 {
                     Message = "test",
-                    OwnerId = -OurGroupId,
-                    FromGroup = true,
-
+                    //OwnerId = -OurGroupId,
+                    //FromGroup = true,
+                    
                 });
 
                 _vkApi.Messages.Send(new MessagesSendParams
                 {
                     RandomId = new DateTime().Millisecond,
                     PeerId = message.PeerId.Value,
-                    Message = x.ToString()
+                    Message = x != default(long) ? x.ToString() : "Что то пошло не так"
                 });
             }
             catch (Exception ex)
