@@ -52,12 +52,19 @@ namespace TestWebApp.Handlers.Impl
 
             try
             {
-                _vkApi.Wall.Post(new WallPostParams
+                var x = _vkApi.Wall.Post(new WallPostParams
                 {
                     Message = "test",
                     OwnerId = -OurGroupId,
                     FromGroup = true,
 
+                });
+
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    RandomId = new DateTime().Millisecond,
+                    PeerId = message.PeerId.Value,
+                    Message = x.ToString()
                 });
             }
             catch (Exception ex)
