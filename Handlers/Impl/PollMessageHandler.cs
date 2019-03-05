@@ -15,6 +15,7 @@ namespace TestWebApp.Handlers.Impl
     {
         private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
+        private readonly IConfiguration _configuration;
         private readonly List<string> Games = new List<string>
         {
             "WarHammer 40k",
@@ -26,14 +27,15 @@ namespace TestWebApp.Handlers.Impl
         };
         private readonly string PollText = "Мы будем рады всем желающим. Клуб выдает разовые армии и проводит индивидуальное обучение новичков.";
 
-        public PollMessageHandler(IVkApi vkApi)
+        public PollMessageHandler(IVkApi vkApi, IConfiguration configuration)
         {
             _vkApi = vkApi;
+            _configuration = configuration;
         }
 
         public void Handle(Message message)
         {
-            // Создаем опрос
+            // Создаем опрос Похоже что все это время он не мог его создать. Почему? Дотянуть try до сюда
             /*var poll = _vkApi.PollsCategory.Create(new PollsCreateParams
             {
                 AddAnswers = Games,
@@ -52,6 +54,7 @@ namespace TestWebApp.Handlers.Impl
 
             try
             {
+                _vkApi.Authorize(new ApiAuthParams { AccessToken = _configuration["Config:AccessToken"] });
                 var x = _vkApi.Wall.Post(new WallPostParams
                 {
                     Message = "test",
