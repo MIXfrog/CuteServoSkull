@@ -15,7 +15,6 @@ namespace TestWebApp.Handlers.Impl
     {
         private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
-        private readonly IConfiguration _configuration;
         private readonly List<string> Games = new List<string>
         {
             "WarHammer 40k",
@@ -27,47 +26,29 @@ namespace TestWebApp.Handlers.Impl
         };
         private readonly string PollText = "Мы будем рады всем желающим. Клуб выдает разовые армии и проводит индивидуальное обучение новичков.";
 
-        public PollMessageHandler(IVkApi vkApi, IConfiguration configuration)
+        public PollMessageHandler(IVkApi vkApi)
         {
             _vkApi = vkApi;
-            _configuration = configuration;
         }
 
         public void Handle(Message message)
         {
-            // Создаем опрос Похоже что все это время он не мог его создать. Почему? Дотянуть try до сюда
-            /*var poll = _vkApi.PollsCategory.Create(new PollsCreateParams
-            {
-                AddAnswers = Games,
-                Question = "test",
-                IsMultiple = false,
-                OwnerId = -OurGroupId
-            });*/
-
-            // Публикуем на стену в группе
-            /*_vkApi.Wall.Post(new WallPostParams
-            {
-                Attachments = new List<MediaAttachment> { poll },
-                OwnerId = -OurGroupId,
-                FromGroup = true
-            });*/
-
+            // Создаем опрос Похоже что все это время он не мог его создать. Почему? Дотянуть try до сюда           
             try
             {
-                _vkApi.Authorize(new ApiAuthParams { AccessToken = _configuration["Config:AccessToken"] });
-                var x = _vkApi.Wall.Post(new WallPostParams
+                var poll = _vkApi.PollsCategory.Create(new PollsCreateParams
                 {
-                    Message = "test",
-                    //OwnerId = -OurGroupId,
-                    //FromGroup = true,
-                    
+                    AddAnswers = Games,
+                    Question = "test",
+                    IsMultiple = false,
+                    OwnerId = -OurGroupId
                 });
 
                 _vkApi.Messages.Send(new MessagesSendParams
                 {
+                    Attachments = new List<MediaAttachment> { poll },
                     RandomId = new DateTime().Millisecond,
-                    PeerId = message.PeerId.Value,
-                    Message = x != default(long) ? x.ToString() : "Что то пошло не так"
+                    PeerId = 2000000001
                 });
             }
             catch (Exception ex)
@@ -79,18 +60,6 @@ namespace TestWebApp.Handlers.Impl
                     Message = ex.Message
                 });
             }
-
-            // Делаем репост в канал
-
-
-            /*_vkApi.Wall.Repost
-
-            _vkApi.Messages.Send(new MessagesSendParams
-            {
-                RandomId = new DateTime().Millisecond,
-                PeerId = message.PeerId.Value,
-                Attachments
-            });*/
         }
     }
 }
