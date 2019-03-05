@@ -36,7 +36,7 @@ namespace TestWebApp.Handlers.Impl
                 {
                     RandomId = new DateTime().Millisecond,
                     PeerId = message.PeerId.Value,
-                    Message = message.OwnerId.Value +"_"+ message.PeerId.Value
+                    Message = message.OwnerId?.ToString() +"_"+ message.PeerId.Value
                 });
             }
             else
