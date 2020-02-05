@@ -12,3 +12,17 @@ C:\Users\Александр\Desktop\TestWebApp\TestWebApp\obj\Debug\netcoreapp2.
 C:\Users\Александр\Desktop\TestWebApp\TestWebApp\bin\Debug\netcoreapp2.2\TestWebApp.pdb
 C:\Users\Александр\Desktop\TestWebApp\TestWebApp\obj\Debug\netcoreapp2.2\TestWebApp.dll
 C:\Users\Александр\Desktop\TestWebApp\TestWebApp\obj\Debug\netcoreapp2.2\TestWebApp.pdb
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.csproj.CoreCompileInputs.cache
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.RazorAssemblyInfo.cache
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.RazorAssemblyInfo.cs
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.AssemblyInfoInputs.cache
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.AssemblyInfo.cs
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.dll
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.pdb
+C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.deps.json
+C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.runtimeconfig.json
+C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.runtimeconfig.dev.json
+C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.dll
+C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.pdb
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.RazorTargetAssemblyInfo.cache
+C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.csprojAssemblyReference.cache

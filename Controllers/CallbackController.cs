@@ -38,9 +38,9 @@ namespace TestWebApp.Controllers
                     return Ok(_configuration["Config:Confirmation"]);
                 case "message_new":
                     {
-                        var msg = Message.FromJson(new VkResponse(updates.Object));
+                        var message = Message.FromJson(new VkResponse(updates.Object));
 
-                        _handlerFactory.CreateHandler(msg).Handle(msg);
+                        _handlerFactory.CreateHandler(message).Handle();
                         break;
                     }
             }

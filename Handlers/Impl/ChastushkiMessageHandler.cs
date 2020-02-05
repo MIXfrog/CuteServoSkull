@@ -9,6 +9,7 @@ namespace TestWebApp.Handlers.Impl
     public class ChastushkiMessageHandler : IHandler
     {
         private readonly IVkApi _vkApi;
+        private readonly Message _message;
 
         private Random _random;
 
@@ -41,18 +42,20 @@ namespace TestWebApp.Handlers.Impl
             "РАЙВЕЛЬ В ОЗЕРЕ КУПАЛАСЬ\nТАМ ЛИТАНИЮ НАШЛА\nЦЕЛЫЙ ДЕНЬ ЕЁ ЧИТАЛА\nДАЖ НА СТРЕЛЬБЫ НЕ ПОШЛА"
         };
 
-        public ChastushkiMessageHandler(IVkApi vkApi)
+        public ChastushkiMessageHandler(IVkApi vkApi, Message message)
         {
             _vkApi = vkApi;
+            _message = message;
+
             _random = new Random();
         }
 
-        public void Handle(Message message)
+        public void Handle()
         {
             _vkApi.Messages.Send(new MessagesSendParams
             {
                 RandomId = new DateTime().Millisecond,
-                PeerId = message.PeerId.Value,
+                PeerId = _message.PeerId.Value,
                 Message = Chastushki[_random.Next(0, Chastushki.Count - 1)]
             });
         }

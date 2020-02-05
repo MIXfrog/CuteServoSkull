@@ -13,8 +13,10 @@ namespace TestWebApp.Handlers.Impl
 {
     public class PollMessageHandler : IHandler
     {
-        private readonly int OurGroupId = 142512108;
         private readonly IVkApi _vkApi;
+        private readonly Message _message;
+
+        private readonly int OurGroupId = 142512108;
         private readonly List<string> Games = new List<string>
         {
             "WarHammer 40k",
@@ -26,12 +28,13 @@ namespace TestWebApp.Handlers.Impl
         };
         private readonly string PollText = "Мы будем рады всем желающим. Клуб выдает разовые армии и проводит индивидуальное обучение новичков.";
 
-        public PollMessageHandler(IVkApi vkApi)
+        public PollMessageHandler(IVkApi vkApi, Message message)
         {
             _vkApi = vkApi;
+            _message = message;
         }
 
-        public void Handle(Message message)
+        public void Handle()
         {
             // Создаем опрос Похоже что все это время он не мог его создать. Почему? Дотянуть try до сюда           
             try
@@ -56,7 +59,7 @@ namespace TestWebApp.Handlers.Impl
                 _vkApi.Messages.Send(new MessagesSendParams
                 {
                     RandomId = new DateTime().Millisecond,
-                    PeerId = message.PeerId.Value,
+                    PeerId = _message.PeerId.Value,
                     Message = ex.Message
                 });
             }

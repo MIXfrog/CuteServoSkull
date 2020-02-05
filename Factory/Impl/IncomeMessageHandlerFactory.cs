@@ -9,6 +9,10 @@ namespace TestWebApp.Factory.Impl
     {
         private readonly IVkApi _vkApi;
 
+        private const string ChastushkiStringIndicator = "частуш";
+        private const string PollStringIndicator = "создай опрос";
+        private const string RecordingStringIndicator = "запись";
+
         public IncomeMessageHandlerFactory(IVkApi vkApi)
         {
             _vkApi = vkApi;
@@ -16,17 +20,23 @@ namespace TestWebApp.Factory.Impl
 
         public IHandler CreateHandler(Message message)
         {
-            if (message.Text.ToLower().Trim().Contains("частуш"))
+            var incomeMessage = message.Text.ToLower().Trim();
+
+            if (incomeMessage.Contains(ChastushkiStringIndicator))
             {
-                return new ChastushkiMessageHandler(_vkApi);
+                return new ChastushkiMessageHandler(_vkApi, message);
             }
-            if (message.Text.ToLower().Trim().Contains("создай опрос"))
+            if (incomeMessage.Contains(PollStringIndicator))
             {
-                return new PollMessageHandler(_vkApi);
+                return new PollMessageHandler(_vkApi, message);
+            }
+            if (incomeMessage.Contains(RecordingStringIndicator))
+            {
+                return new RecordingMessageHandler(_vkApi, message);
             }
             else
             {
-                return new DefaultMessageHandler(_vkApi);
+                return new DefaultMessageHandler(_vkApi, message);
             }
         }
     }
