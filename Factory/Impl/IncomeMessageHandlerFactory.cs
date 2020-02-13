@@ -1,5 +1,6 @@
 ﻿using TestWebApp.Handlers;
 using TestWebApp.Handlers.Impl;
+using TestWebApp.Services;
 using VkNet.Abstractions;
 using VkNet.Model;
 
@@ -7,15 +8,14 @@ namespace TestWebApp.Factory.Impl
 {
     public class IncomeMessageHandlerFactory : IIncomeMessageHandlerFactory
     {
-        private readonly IVkApi _vkApi;
+        private readonly IVkApiIntegrationService _vkApiIntegration;
 
         private const string ChastushkiStringIndicator = "частуш";
-        private const string PollStringIndicator = "создай опрос";
         private const string RecordingStringIndicator = "запись";
 
-        public IncomeMessageHandlerFactory(IVkApi vkApi)
+        public IncomeMessageHandlerFactory(IVkApiIntegrationService vkApiIntegration)
         {
-            _vkApi = vkApi;
+            _vkApiIntegration = vkApiIntegration;
         }
 
         public IHandler CreateHandler(Message message)
@@ -24,19 +24,15 @@ namespace TestWebApp.Factory.Impl
 
             if (incomeMessage.Contains(ChastushkiStringIndicator))
             {
-                return new ChastushkiMessageHandler(_vkApi, message);
-            }
-            if (incomeMessage.Contains(PollStringIndicator))
-            {
-                return new PollMessageHandler(_vkApi, message);
+                return new ChastushkiMessageHandler(_vkApiIntegration, message);
             }
             if (incomeMessage.Contains(RecordingStringIndicator))
             {
-                return new RecordingMessageHandler(_vkApi, message);
+                return new RecordingMessageHandler(_vkApiIntegration, message);
             }
             else
             {
-                return new DefaultMessageHandler(_vkApi, message);
+                return new DefaultMessageHandler(_vkApiIntegration, message);
             }
         }
     }

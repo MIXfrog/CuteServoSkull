@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using TestWebApp.Factory;
 using TestWebApp.Factory.Impl;
 using TestWebApp.Services;
+using TestWebApp.Services.Impl;
 using VkNet;
 using VkNet.Abstractions;
 using VkNet.Model;

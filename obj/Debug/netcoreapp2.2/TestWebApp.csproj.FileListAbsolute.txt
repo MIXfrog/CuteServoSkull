@@ -25,4 +25,3 @@ C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\
 C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.dll
 C:\Users\Александр\source\repos\CuteServoSkull\bin\Debug\netcoreapp2.2\TestWebApp.pdb
 C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.RazorTargetAssemblyInfo.cache
-C:\Users\Александр\source\repos\CuteServoSkull\obj\Debug\netcoreapp2.2\TestWebApp.csprojAssemblyReference.cache
