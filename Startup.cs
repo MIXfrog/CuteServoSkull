@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TestWebApp.Factory;
 using TestWebApp.Factory.Impl;
+using TestWebApp.Services;
 using VkNet;
 using VkNet.Abstractions;
 using VkNet.Model;
@@ -39,6 +40,7 @@ namespace TestWebApp
             });
 
             services.AddSingleton<IIncomeMessageHandlerFactory, IncomeMessageHandlerFactory>();
+            services.AddSingleton<IVkApiIntegrationService, VkApiIntegrationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

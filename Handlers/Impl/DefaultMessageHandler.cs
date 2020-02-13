@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestWebApp.Services;
 using VkNet.Abstractions;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
@@ -8,8 +9,9 @@ namespace TestWebApp.Handlers.Impl
 {
     public class DefaultMessageHandler : IHandler
     {
-        private readonly IVkApi _vkApi;
+        private readonly IVkApiIntegrationService _vkApiIntegration;
         private readonly Message _message;
+
         private Random _random;
 
         private readonly List<string> DefaultMessages = new List<string>
@@ -23,9 +25,9 @@ namespace TestWebApp.Handlers.Impl
             "Моя жизнь - служение"
         };
 
-        public DefaultMessageHandler(IVkApi vkApi, Message message)
+        public DefaultMessageHandler(IVkApiIntegrationService vkApiIntegration, Message message)
         {
-            _vkApi = vkApi;
+            _vkApiIntegration = vkApiIntegration;
             _message = message;
 
             _random = new Random();
@@ -33,12 +35,9 @@ namespace TestWebApp.Handlers.Impl
 
         public void Handle()
         {
-            _vkApi.Messages.Send(new MessagesSendParams
-            {
-                RandomId = new DateTime().Millisecond,
-                PeerId = _message.PeerId.Value,
-                Message = DefaultMessages[_random.Next(0, DefaultMessages.Count - 1)]
-            });
+            _vkApiIntegration.SendMessage(
+                DefaultMessages[_random.Next(0, DefaultMessages.Count - 1)], 
+                _message);
         }
     }
 }

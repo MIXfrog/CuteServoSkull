@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using TestWebApp.Model;
+using TestWebApp.Services;
 using VkNet.Abstractions;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
@@ -19,7 +20,7 @@ namespace TestWebApp.Handlers.Impl
 {
     public class RecordingMessageHandler : IHandler
     {
-        private readonly IVkApi _vkApi;
+        private readonly IVkApiIntegrationService _vkApiIntegration;
         private readonly Message _message;
 
         private const string ErrorMessageResponseText = "Не удалось осуществить запись";
@@ -29,9 +30,9 @@ namespace TestWebApp.Handlers.Impl
         private const string AppName = "CuteServoSkull";
         private const string ClientSecret = "client_secret.json";
 
-        public RecordingMessageHandler(IVkApi vkApi, Message message)
+        public RecordingMessageHandler(IVkApiIntegrationService vkApiIntegration, Message message)
         {
-            _vkApi = vkApi;
+            _vkApiIntegration = vkApiIntegration;
             _message = message;
         }
 
@@ -45,21 +46,12 @@ namespace TestWebApp.Handlers.Impl
 
                 WriteRecordMessage(service, recordMessage);
 
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    RandomId = new DateTime().Millisecond,
-                    PeerId = _message.PeerId.Value,
-                    Message = SuccessMessageResponseText
-                });
+
+                _vkApiIntegration.SendMessage(SuccessMessageResponseText, _message);
             }
             catch(Exception ex)
             {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    RandomId = new DateTime().Millisecond,
-                    PeerId = _message.PeerId.Value,
-                    Message = $"{ErrorMessageResponseText}: {ex.Message}"
-                });
+                _vkApiIntegration.SendMessage($"{ErrorMessageResponseText}: {ex.Message}", _message);
             }
         }
 

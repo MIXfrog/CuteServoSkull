@@ -17,14 +17,11 @@ namespace TestWebApp.Controllers
         /// </summary>
         private readonly IConfiguration _configuration;
 
-        private readonly IVkApi _vkApi;
-
         private readonly IIncomeMessageHandlerFactory _handlerFactory;
 
-        public CallbackController(IConfiguration configuration, IVkApi vkApi, IIncomeMessageHandlerFactory handlerFactory)
+        public CallbackController(IConfiguration configuration, IIncomeMessageHandlerFactory handlerFactory)
         {
             _configuration = configuration;
-            _vkApi = vkApi;
             _handlerFactory = handlerFactory;
         }
 
@@ -44,6 +41,7 @@ namespace TestWebApp.Controllers
                         break;
                     }
             }
+
             // Возвращаем "ok" серверу Callback API
             return Ok("ok");
         }
