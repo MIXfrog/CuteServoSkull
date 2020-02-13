@@ -28,7 +28,7 @@ namespace TestWebApp.Handlers.Impl
         private const string SpreadsheetId = "1VfLI2ZENZFSl89QiMkbQ7OjiIZdY4scM6gJbk0bBR68";
         private static readonly string[] ScopeSheets = { SheetsService.Scope.Spreadsheets };
         private const string AppName = "CuteServoSkull";
-        private const string ClientSecret = "client_secret.json";
+        private const string ClientSecret = "google-credentials.json";
 
         public RecordingMessageHandler(IVkApiIntegrationService vkApiIntegration, Message message)
         {
